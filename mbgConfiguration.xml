@@ -33,11 +33,11 @@
         </javaClientGenerator>
         <!--表与实体映射关系-->
         <table tableName="driver" domainObjectName="Driver"></table>
-        <!--<table tableName="employee" domainObjectName="Employee"></table>-->
-        <!--<table tableName="manager" domainObjectName="Manager"></table>-->
-        <!--<table tableName="order" domainObjectName="Order"></table>-->
-        <!--<table tableName="order_detail" domainObjectName="OrderDetail"></table>-->
-        <!--<table tableName="right" domainObjectName="Right"></table>-->
+        <table tableName="employee" domainObjectName="Employee"></table>
+        <table tableName="manager" domainObjectName="Manager"></table>
+        <table tableName="orders" domainObjectName="Order"></table>
+        <table tableName="order_detail" domainObjectName="OrderDetail"></table>
+        <table tableName="rights" domainObjectName="Right"></table>
 
     </context>
 </generatorConfiguration>

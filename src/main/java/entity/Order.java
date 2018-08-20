@@ -11,7 +11,11 @@ public class Order {
 
     private Date finishTime;
 
+    private Date startTime;
+
     private Integer passengerNumber;
+
+    private String status;
 
     public Integer getOrderId() {
         return orderId;
@@ -45,11 +49,27 @@ public class Order {
         this.finishTime = finishTime;
     }
 
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
     public Integer getPassengerNumber() {
         return passengerNumber;
     }
 
     public void setPassengerNumber(Integer passengerNumber) {
         this.passengerNumber = passengerNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 }

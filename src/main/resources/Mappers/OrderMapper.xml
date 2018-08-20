@@ -6,7 +6,9 @@
     <result column="driver_name" jdbcType="VARCHAR" property="driverName" />
     <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
     <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="passenger_number" jdbcType="INTEGER" property="passengerNumber" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_id, driver_name, car_number, finish_time, passenger_number
+    order_id, driver_name, car_number, finish_time, start_time, passenger_number, status
   </sql>
   <select id="selectByExample" parameterType="entity.OrderExample" resultMap="BaseResultMap">
     select
@@ -100,10 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="entity.Order">
-    insert into orders (order_id, driver_name, car_number,
-      finish_time, passenger_number)
+    insert into orders (order_id, driver_name, car_number, 
+      finish_time, start_time, passenger_number, 
+      status)
     values (#{orderId,jdbcType=INTEGER}, #{driverName,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, 
-      #{finishTime,jdbcType=TIMESTAMP}, #{passengerNumber,jdbcType=INTEGER})
+      #{finishTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{passengerNumber,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="entity.Order">
     insert into orders
@@ -120,8 +124,14 @@
       <if test="finishTime != null">
         finish_time,
       </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
       <if test="passengerNumber != null">
         passenger_number,
+      </if>
+      <if test="status != null">
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -137,8 +147,14 @@
       <if test="finishTime != null">
         #{finishTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="passengerNumber != null">
         #{passengerNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -163,8 +179,14 @@
       <if test="record.finishTime != null">
         finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.passengerNumber != null">
         passenger_number = #{record.passengerNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -177,7 +199,9 @@
       driver_name = #{record.driverName,jdbcType=VARCHAR},
       car_number = #{record.carNumber,jdbcType=VARCHAR},
       finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
-      passenger_number = #{record.passengerNumber,jdbcType=INTEGER}
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      passenger_number = #{record.passengerNumber,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -194,8 +218,14 @@
       <if test="finishTime != null">
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="passengerNumber != null">
         passenger_number = #{passengerNumber,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
@@ -205,7 +235,9 @@
     set driver_name = #{driverName,jdbcType=VARCHAR},
       car_number = #{carNumber,jdbcType=VARCHAR},
       finish_time = #{finishTime,jdbcType=TIMESTAMP},
-      passenger_number = #{passengerNumber,jdbcType=INTEGER}
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      passenger_number = #{passengerNumber,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>

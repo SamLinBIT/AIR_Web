@@ -4,8 +4,12 @@
   <resultMap id="BaseResultMap" type="entity.OrderDetail">
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="driver_username" jdbcType="VARCHAR" property="driverUsername" />
     <result column="start_address" jdbcType="VARCHAR" property="startAddress" />
+    <result column="start_position" jdbcType="VARCHAR" property="startPosition" />
     <result column="end_address" jdbcType="VARCHAR" property="endAddress" />
+    <result column="end_position" jdbcType="VARCHAR" property="endPosition" />
     <result column="price" jdbcType="VARCHAR" property="price" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_id, name, start_address, end_address, price
+    order_id, name, username, driver_username, start_address, start_position, end_address, 
+    end_position, price
   </sql>
   <select id="selectByExample" parameterType="entity.OrderDetailExample" resultMap="BaseResultMap">
     select
@@ -90,10 +95,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="entity.OrderDetail">
-    insert into order_detail (order_id, name, start_address, 
-      end_address, price)
-    values (#{orderId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{startAddress,jdbcType=VARCHAR}, 
-      #{endAddress,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR})
+    insert into order_detail (order_id, name, username, 
+      driver_username, start_address, start_position, 
+      end_address, end_position, price
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{driverUsername,jdbcType=VARCHAR}, #{startAddress,jdbcType=VARCHAR}, #{startPosition,jdbcType=VARCHAR}, 
+      #{endAddress,jdbcType=VARCHAR}, #{endPosition,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="entity.OrderDetail">
     insert into order_detail
@@ -104,11 +113,23 @@
       <if test="name != null">
         name,
       </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="driverUsername != null">
+        driver_username,
+      </if>
       <if test="startAddress != null">
         start_address,
       </if>
+      <if test="startPosition != null">
+        start_position,
+      </if>
       <if test="endAddress != null">
         end_address,
+      </if>
+      <if test="endPosition != null">
+        end_position,
       </if>
       <if test="price != null">
         price,
@@ -121,11 +142,23 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="driverUsername != null">
+        #{driverUsername,jdbcType=VARCHAR},
+      </if>
       <if test="startAddress != null">
         #{startAddress,jdbcType=VARCHAR},
       </if>
+      <if test="startPosition != null">
+        #{startPosition,jdbcType=VARCHAR},
+      </if>
       <if test="endAddress != null">
         #{endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="endPosition != null">
+        #{endPosition,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         #{price,jdbcType=VARCHAR},
@@ -147,11 +180,23 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driverUsername != null">
+        driver_username = #{record.driverUsername,jdbcType=VARCHAR},
+      </if>
       <if test="record.startAddress != null">
         start_address = #{record.startAddress,jdbcType=VARCHAR},
       </if>
+      <if test="record.startPosition != null">
+        start_position = #{record.startPosition,jdbcType=VARCHAR},
+      </if>
       <if test="record.endAddress != null">
         end_address = #{record.endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endPosition != null">
+        end_position = #{record.endPosition,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=VARCHAR},
@@ -165,8 +210,12 @@
     update order_detail
     set order_id = #{record.orderId,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      driver_username = #{record.driverUsername,jdbcType=VARCHAR},
       start_address = #{record.startAddress,jdbcType=VARCHAR},
+      start_position = #{record.startPosition,jdbcType=VARCHAR},
       end_address = #{record.endAddress,jdbcType=VARCHAR},
+      end_position = #{record.endPosition,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

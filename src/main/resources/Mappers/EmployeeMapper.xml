@@ -5,6 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="employee_number" jdbcType="INTEGER" property="employeeNumber" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
   </resultMap>
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, employee_number, name, phone, register_time
+    id, employee_number, name, username, password, phone, register_time
   </sql>
   <select id="selectByExample" parameterType="entity.EmployeeExample" resultMap="BaseResultMap">
     select
@@ -101,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="entity.Employee">
     insert into employee (id, employee_number, name, 
-      phone, register_time)
+      username, password, phone, 
+      register_time)
     values (#{id,jdbcType=INTEGER}, #{employeeNumber,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP})
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="entity.Employee">
     insert into employee
@@ -116,6 +120,12 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
       </if>
       <if test="phone != null">
         phone,
@@ -133,6 +143,12 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
@@ -160,6 +176,12 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
@@ -176,6 +198,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       employee_number = #{record.employeeNumber,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       register_time = #{record.registerTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -191,6 +215,12 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
@@ -204,6 +234,8 @@
     update employee
     set employee_number = #{employeeNumber,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       register_time = #{registerTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
